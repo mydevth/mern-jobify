@@ -13,5 +13,4 @@ function App() {
     </BrowserRouter>
   );
 }
-// eslint-disable-next-line
 export default App;
