@@ -41,13 +41,13 @@ const AppProvider = ({ children }) => {
     }, 3000);
   };
 
-  const addUserToLocalStorge = ({ user, token, location }) => {
+  const addUserToLocalStorage = ({ user, token, location }) => {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", token);
     localStorage.setItem("location", location);
   };
 
-  const removeUserFromLocalStrage = () => {
+  const removeUserFromLocalStorage = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("location");
@@ -63,7 +63,7 @@ const AppProvider = ({ children }) => {
         type: REGISTER_USER_SUCCESS,
         payload: { user, token, location },
       });
-      addUserToLocalStorge({ user, token, location });
+      addUserToLocalStorage({ user, token, location });
     } catch (error) {
       // console.log(error.response);
       dispatch({
