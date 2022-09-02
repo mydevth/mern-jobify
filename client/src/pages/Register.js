@@ -1,12 +1,8 @@
-// /* eslint-disable no-restricted-globals */
-// /* eslint-disable no-undef */
-
 import { useState, useEffect } from "react";
-import { useAppContext } from "../context/appContext";
 import { Logo, FormRow, Alert } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
+import { useAppContext } from "../context/appContext";
 import { useNavigate } from "react-router-dom";
-
 const initialState = {
   name: "",
   email: "",
@@ -17,8 +13,15 @@ const initialState = {
 const Register = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialState);
-  const { user, isLoading, showAlert, displayAlert, registerUser } =
-    useAppContext();
+  const {
+    user,
+    isLoading,
+    showAlert,
+    displayAlert,
+    registerUser,
+    loginUser,
+    setupUser,
+  } = useAppContext();
 
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -34,12 +37,19 @@ const Register = () => {
       displayAlert();
       return;
     }
-
     const currentUser = { name, email, password };
     if (isMember) {
-      console.log("already a member");
+      setupUser({
+        currentUser,
+        endPoint: "login",
+        alertText: "Login Successful! Redirecting....",
+      });
     } else {
-      registerUser(currentUser);
+      setupUser({
+        currentUser,
+        endPoint: "register",
+        alertText: "User Created! Redirecting......",
+      });
     }
   };
 
